@@ -1,16 +1,23 @@
 import jwt from "jsonwebtoken";
 
-const SECRET = "mysecretkey"; // later we move this to .env
+const SECRET = "mysecretkey";
 
 export const login = (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  // 🔥 Hardcoded user (for now)
-  if (email === "admin@gmail.com" && password === "123456") {
-    const token = jwt.sign({ email }, SECRET, { expiresIn: "1h" });
+    console.log("Login Data:", email, password);
 
-    return res.json({ token });
+    if (String(email).trim() === "admin@gmail.com" && String(password).trim() === "123456") {
+      const token = jwt.sign({ email }, SECRET, { expiresIn: "1h" });
+
+      return res.json({ token }); // ✅ RESPONSE
+    }
+
+    return res.status(401).json({ error: "Invalid credentials" }); // ✅ RESPONSE
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Server error" }); // ✅ RESPONSE
   }
-
-  return res.status(401).json({ error: "Invalid credentials" });
 };
