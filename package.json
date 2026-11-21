@@ -1,0 +1,13 @@
+{
+  "name": "rice-mill-system",
+  "private": true,
+  "description": "Rice Mill Management System: builds the React app and runs it from the Express API as one service",
+  "scripts": {
+    "build": "npm ci --prefix backend --omit=dev && npm ci --prefix frontend && npm run build --prefix frontend",
+    "start": "npm start --prefix backend",
+    "db:init": "npm run db:init --prefix backend"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

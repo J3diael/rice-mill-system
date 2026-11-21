@@ -1,0 +1,26 @@
+# One-click deploy on Render: Dashboard → New → Blueprint → pick this repo.
+# You only need to paste DATABASE_URL (e.g. a free Neon PostgreSQL database)
+# and choose the admin email and password.
+services:
+  - type: web
+    name: rice-mill-system
+    runtime: node
+    plan: free
+    buildCommand: npm run build && npm run db:init
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 8h
+      - key: ADMIN_NAME
+        value: Administrator
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false

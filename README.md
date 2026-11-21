@@ -63,9 +63,8 @@ npm run dev                 # API on http://localhost:5000/api
 
 # 3. Frontend (new terminal)
 cd frontend
-cp .env.example .env
 npm install
-npm run dev                 # app on http://localhost:3000
+npm run dev                 # app on http://localhost:3000 (calls the API through a proxy)
 ```
 
 Log in with the `ADMIN_EMAIL` and `ADMIN_PASSWORD` you set in `backend/.env`.
@@ -79,6 +78,14 @@ DATABASE_URL=postgres://postgres:yourpassword@localhost:5432/rice_mill_test npm 
 ```
 
 The tests wipe and rebuild the test database, so never point them at your real data. They refuse to run unless the database name contains `test`.
+
+## Deployment
+
+In production the Express server also serves the built React app, so the whole system runs as **one web service with one URL**.
+
+- `npm run build` (repo root): installs both parts and builds the frontend
+- `npm start` (repo root): starts the API and serves the app
+- `render.yaml` sets this up on [Render](https://render.com) as a Blueprint. Pair it with a free PostgreSQL database (e.g. [Neon](https://neon.tech)) and set `DATABASE_URL`, `ADMIN_EMAIL` and `ADMIN_PASSWORD`. The database tables are created automatically on each deploy.
 
 ## API overview
 
