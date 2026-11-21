@@ -2,6 +2,9 @@
 
 A full-stack web app for small rice mills in the Philippines. It tracks palay and supplies, records each milling run with its recovery rate, sells milled rice through a point-of-sale screen with printable receipts, and shows the day's numbers on a dashboard.
 
+**🔗 Live demo:** https://rice-mill-system-o37c.onrender.com
+(free hosting: the first load can take up to a minute while the server wakes up. Demo login available on request.)
+
 **Stack:** React 19 + Vite · Node.js + Express 5 · PostgreSQL · JWT auth · Chart.js
 
 ![Dashboard](docs/screenshots/dashboard.png)
